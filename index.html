@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塘沽第一中学学生协会官网</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", system-ui, sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 五套主题变量 新增海棠粉theme-begonia */
+        /* 1 红色 默认校园主题 */
+        :root.theme-red {
+            --main: #C70000;
+            --main-light: #e63232;
+            --glass-card: rgba(255,255,255,0.3);
+            --glass-nav: rgba(180,0,0,0.52);
+            --grad-top: #fff6f6;
+            --grad-bottom: #ffe8e8;
+            --text-h: #111111;
+            --text-p: #444444;
+            --text-light: #777777;
+            --border-glass: rgba(255,255,255,0.6);
+        }
+        /* 2 紫色主题 */
+        :root.theme-purple {
+            --main: #7B2CFF;
+            --main-light: #9758ff;
+            --glass-card: rgba(255,255,255,0.3);
+            --glass-nav: rgba(102,20,220,0.52);
+            --grad-top: #f7f3ff;
+            --grad-bottom: #ebe3ff;
+            --text-h: #111111;
+            --text-p: #444444;
+            --text-light: #777777;
+            --border-glass: rgba(255,255,255,0.6);
+        }
+        /* 3 蓝色主题 */
+        :root.theme-blue {
+            --main: #0066FF;
+            --main-light: #3385ff;
+            --glass-card: rgba(255,255,255,0.3);
+            --glass-nav: rgba(0,90,210,0.52);
+            --grad-top: #f0f7ff;
+            --grad-bottom: #e1eeff;
+            --text-h: #111111;
+            --text-p: #444444;
+            --text-light: #777777;
+            --border-glass: rgba(255,255,255,0.6);
+        }
+        /* 4 海棠粉 新增温柔粉调主题 */
+        :root.theme-begonia {
+            --main: #EC9ABE;
+            --main-light: #F2B6D0;
+            --glass-card: rgba(255,255,255,0.35);
+            --glass-nav: rgba(236,154,190,0.55);
+            --grad-top: #FFF2F7;
+            --grad-bottom: #ffe4ee;
+            --text-h: #221118;
+            --text-p: #553340;
+            --text-light: #997786;
+            --border-glass: rgba(255,255,255,0.7);
+        }
+        /* 5 深夜暗夜模式 */
+        :root.theme-night {
+            --main: #4880ff;
+            --main-light: #6398ff;
+            --glass-card: rgba(35,40,55,0.38);
+            --glass-nav: rgba(15,22,38,0.65);
+            --grad-top: #101624;
+            --grad-bottom: #080c16;
+            --text-h: #ffffff;
+            --text-p: #e4ebf8;
+            --text-light: #b0bddb;
+            --border-glass: rgba(255,255,255,0.1);
+        }
+        /* 默认红色主题 */
+        :root {
+            --main: #C70000;
+            --main-light: #e63232;
+            --glass-card: rgba(255,255,255,0.3);
+            --glass-nav: rgba(180,0,0,0.52);
+            --grad-top: #fff6f6;
+            --grad-bottom: #ffe8e8;
+            --text-h: #111111;
+            --text-p: #444444;
+            --text-light: #777777;
+            --border-glass: rgba(255,255,255,0.6);
+        }
+
+        body {
+            /* 垂直柔和渐变背景 */
+            background: linear-gradient(180deg, var(--grad-top), var(--grad-bottom));
+            background-attachment: fixed;
+            color: var(--text-p);
+            transition: background 0.45s ease;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        .wrap {
+            width: 1240px;
+            margin: 0 auto;
+            max-width: 96%;
+        }
+
+        /* 顶部通栏导航 */
+        .top-nav {
+            width: 100%;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: var(--glass-nav);
+            border-bottom: 1px solid rgba(255,255,255,0.22);
+            box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            transition: all 0.45s ease;
+        }
+        .top-nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #fff;
+        }
+        .logo-text h1 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.88;
+        }
+        .nav-list {
+            display: flex;
+            gap: 6px;
+        }
+        .nav-list li a {
+            display: inline-block;
+            color: #ffffff;
+            font-size: 15px;
+            padding: 9px 16px;
+            border-radius: 8px;
+            transition: 0.28s ease;
+        }
+        .nav-list li a:hover,
+        .nav-list li a.active {
+            background: rgba(255,255,255,0.22);
+        }
+        .contact-btn {
+            padding: 8px 18px;
+            border: 1px solid rgba(255,255,0.5);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .contact-btn:hover {
+            background: #fff;
+            color: var(--main);
+        }
+
+        /* 首页横幅banner */
+        .banner-box {
+            width: 100%;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .banner-title {
+            font-size: 42px;
+            color: var(--main);
+            font-weight: 600;
+            margin-bottom: 14px;
+            transition: color 0.45s;
+        }
+        .banner-desc {
+            font-size: 17px;
+            color: var(--text-p);
+            transition: color 0.45s;
+        }
+
+        /* 通用区块标题 */
+        .block-title {
+            font-size: 26px;
+            color: var(--text-h);
+            margin: 70px 0 24px;
+            padding-left: 12px;
+            border-left: 5px solid var(--main);
+            transition: color 0.45s, border-color 0.45s;
+        }
+
+        /* 毛玻璃通用卡片 */
+        .glass-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 36px rgba(0,0,0,0.07),
+                        inset 0 1px 0 rgba(255,255,255,0.65),
+                        inset 0 -1px 0 rgba(255,255,255,0.15);
+            transition: all 0.45s ease;
+        }
+
+        /* 协会简介区块 */
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--text-p);
+            transition: color 0.45s;
+        }
+
+        /* 社团汇总三栏布局 */
+        .club-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 20px;
+        }
+        .club-item {
+            background: var(--glass-card);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.32s ease;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+        .club-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 48px rgba(0,0,0,0.12);
+        }
+        .club-item h4 {
+            font-size: 19px;
+            color: var(--main);
+            margin-bottom: 12px;
+            transition: color 0.45s;
+        }
+        .club-item p {
+            font-size: 14px;
+            color: var(--text-p);
+            line-height: 1.8;
+            transition: color 0.45s;
+        }
+
+        /* 通知公告侧边栏 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 30px;
+        }
+        .notice-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(130,130,130,0.2);
+            color: var(--text-p);
+            transition: color 0.45s, border-color 0.45s;
+        }
+        .notice-list li:last-child {
+            border-bottom: none;
+        }
+        .notice-list a:hover {
+            color: var(--main);
+        }
+        .notice-date {
+            font-size: 13px;
+            color: var(--text-light);
+            transition: color 0.45s;
+        }
+
+        /* 底部页脚 */
+        footer {
+            margin-top: 90px;
+            padding: 45px 0;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            background: rgba(12,16,26,0.4);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 2;
+            transition: all 0.45s;
+        }
+        footer a {
+            color: var(--main-light);
+        }
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* 右侧主题切换面板 */
+        .theme-panel {
+            position: fixed;
+            right: 22px;
+            top: 140px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 16px 10px;
+            border-radius: 32px;
+            backdrop-filter: blur(14px);
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        .theme-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+            transition: transform 0.24s;
+        }
+        .theme-dot:hover {
+            transform: scale(1.18);
+        }
+        .dot-red { background: #C70000; }
+        .dot-purple { background: #7B2CFF; }
+        .dot-blue { background: #0066FF; }
+        .dot-begonia { background: #EC9ABE; }
+        .dot-night { background: #0c101a; border-color:#777; }
+
+        /* 暗夜模式全局文字兜底 */
+        :root.theme-night h1,
+        :root.theme-night h2,
+        :root.theme-night h3,
+        :root.theme-night h4,
+        :root.theme-night .block-title,
+        :root.theme-night .club-item h4,
+        :root.theme-night .intro-text,
+        :root.theme-night .club-item p,
+        :root.theme-night .notice-list li,
+        :root.theme-night .notice-date {
+            color: #ffffff !important;
+        }
+
+        /* AI对话模块样式 */
+        .ai-float-btn{
+            position: fixed;
+            right:24px;
+            bottom:30px;
+            width:56px;
+            height:56px;
+            border-radius:50%;
+            background:var(--main);
+            color:#fff;
+            font-size:24px;
+            border:none;
+            box-shadow:0 6px 24px rgba(0,0,0,0.15);
+            z-index:998;
+            cursor:pointer;
+            backdrop-filter:blur(12px);
+            transition:0.3s;
+        }
+        .ai-float-btn:hover{
+            transform:scale(1.1);
+        }
+        .ai-dialog{
+            position:fixed;
+            right:24px;
+            bottom:96px;
+            width:380px;
+            height:520px;
+            border-radius:18px;
+            backdrop-filter:blur(26px);
+            background:var(--glass-card);
+            border:1px solid var(--border-glass);
+            box-shadow:0 8px 40px rgba(0,0,0,0.12);
+            z-index:999;
+            display:none;
+            flex-direction:column;
+            overflow:hidden;
+        }
+        .ai-dialog-header{
+            padding:14px 18px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(0,0,0,0.05);
+        }
+        .ai-title{
+            font-size:17px;
+            font-weight:600;
+            color:var(--text-h);
+        }
+        .ai-close{
+            width:28px;
+            height:28px;
+            border-radius:50%;
+            border:none;
+            background:rgba(0,0,0,0.08);
+            cursor:pointer;
+            color:var(--text-p);
+        }
+        .ai-message-box{
+            flex:1;
+            padding:16px;
+            overflow-y:auto;
+        }
+        .msg-item{
+            margin-bottom:14px;
+            max-width:85%;
+        }
+        .msg-user{
+            margin-left:auto;
+        }
+        .msg-bubble{
+            padding:10px 14px;
+            border-radius:12px;
+            line-height:1.7;
+            font-size:14px;
+        }
+        .msg-user .msg-bubble{
+            background:var(--main);
+            color:#fff;
+            border-top-right-radius:2px;
+        }
+        .msg-ai .msg-bubble{
+            background:rgba(255,255,255,0.25);
+            color:var(--text-p);
+            border-top-left-radius:2px;
+        }
+        .ai-input-area{
+            display:flex;
+            gap:10px;
+            padding:12px 16px;
+            border-top:1px solid var(--border-glass);
+        }
+        #ai-input{
+            flex:1;
+            padding:10px 14px;
+            border-radius:30px;
+            border:1px solid var(--border-glass);
+            background:rgba(255,255,255,0.2);
+            outline:none;
+            color:var(--text-h);
+        }
+        #ai-send{
+            padding:0 18px;
+            border-radius:30px;
+            border:none;
+            background:var(--main);
+            color:#fff;
+            cursor:pointer;
+        }
+        :root.theme-night .ai-input-area{
+            border-top-color:rgba(255,255,255,0.08);
+        }
+        :root.theme-night #ai-input{
+            color:#fff;
+        }
+
+        /* 移动端适配 */
+        @media(max-width:768px){
+            .top-nav-inner {
+                flex-direction: column;
+                height: auto;
+                padding:14px 0;
+                gap:12px;
+            }
+            .nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .banner-title {
+                font-size: 28px;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .club-grid {
+                grid-template-columns: 1fr;
+            }
+            .theme-panel {
+                top: auto;
+                bottom: 30px;
+                right: 12px;
+                flex-direction: row;
+                border-radius: 24px;
+            }
+            .ai-dialog{
+                width:calc(100% - 24px);
+                height:70vh;
+                right:12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 右侧主题切换面板 -->
+    <div class="theme-panel">
+        <div class="theme-dot dot-red" onclick="setTheme('red')"></div>
+        <div class="theme-dot dot-purple" onclick="setTheme('purple')"></div>
+        <div class="theme-dot dot-blue" onclick="setTheme('blue')"></div>
+        <div class="theme-dot dot-begonia" onclick="setTheme('begonia')"></div>
+        <div class="theme-dot dot-night" onclick="setTheme('night')"></div>
+    </div>
+
+    <!-- AI悬浮按钮+对话弹窗 -->
+    <button class="ai-float-btn" id="aiToggleBtn">AI</button>
+    <div class="ai-dialog" id="aiDialog">
+        <div class="ai-dialog-header">
+            <span class="ai-title">校园AI咨询助手</span>
+            <button class="ai-close" id="aiCloseBtn">×</button>
+        </div>
+        <div class="ai-message-box" id="msgBox">
+            <div class="msg-item msg-ai">
+                <div class="msg-bubble">你好！我是塘沽一中学生协会AI助手，可以为你解答社团、招新、活动、团委相关问题。</div>
+            </div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" id="ai-input" placeholder="输入你的问题...">
+            <button id="ai-send">发送</button>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="wrap top-nav-inner">
+            <div class="logo-area">
+                <div class="logo-text">
+                    <h1>塘沽第一中学 学生协会</h1>
+                    <p>校园学生自治平台</p>
+                </div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="/" class="active">首页</a></li>
+                <li><a href="#intro">协会简介</a></li>
+                <li><a href="#activity">活动风采</a></li>
+                <li><a href="#club">社团汇总</a></li>
+                <li><a href="#notice">通知公告</a></li>
+                <li><a href="#join">招新报名</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <a href="#contact" class="contact-btn">联系指导老师</a>
+        </div>
+    </div>
+
+    <!-- 横幅 -->
+    <div class="banner-box">
+        <h2 class="banner-title">欢迎来到塘沽一中学生协会官方网站</h2>
+        <p class="banner-desc">服务全体学子 · 丰富校园文化 · 搭建成长实践平台</p>
+    </div>
+
+    <div class="wrap">
+        <h3 class="block-title" id="intro">协会简介</h3>
+        <div class="glass-card">
+            <p class="intro-text">
+                塘沽第一中学学生协会是在校德育处、团委统一指导下成立的学生自治组织，核心宗旨为服务全体在校同学、丰富校园文体文化、搭建学生实践展示平台。协会统一统筹管理校内文艺、学科、志愿服务各类社团组织，全年常态化举办校园文艺汇演、学科知识竞赛、秋季运动会、社区敬老志愿、科创展示等多元化校园活动，充分发挥学生自主管理、自主组织、自主展示的职能，全方位助力学生综合素质全面发展。
+            </p>
+        </div>
+
+        <h3 class="block-title" id="activity">近期活动风采</h3>
+        <div class="glass-card">
+            <p class="intro-text">
+                1. 校园春季文艺汇演节目展演<br>
+                2. 全校跨年级学科知识竞赛总决赛<br>
+                3. 社区养老院敬老志愿服务活动<br>
+                4. 校园秋季运动会志愿者筹备工作
+            </p>
+        </div>
+
+        <h3 class="block-title" id="club">社团汇总</h3>
+        <div class="club-grid">
+            <div class="club-item">
+                <h4>文艺类社团</h4>
+                <p>校园合唱团、舞蹈社、美术绘画社、校园播音主持社</p>
+            </div>
+            <div class="club-item">
+                <h4>学科科创类社团</h4>
+                <p>数理研讨社、校园文学社、英语沙龙、科技创新小组</p>
+            </div>
+            <div class="club-item">
+                <h4>实践志愿类社团</h4>
+                <p>青年志愿者协会、校园文明监督服务队</p>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="left-col">
+                <h3 class="block-title" id="join">招新报名通道</h3>
+                <div class="glass-card">
+                    <p class="intro-text">
+                        每学年9月开学季开启全校统一社团招新，有意向加入任意社团、学生协会干事管理团队的同学，可关注校内公告栏通知，线下填写纸质报名表提交至学校团委办公室完成登记。
+                    </p>
+                </div>
+
+                <h3 class="block-title" id="contact">联系我们</h3>
+                <div class="glass-card">
+                    <p class="intro-text">
+                        指导管理部门：塘沽一中团委、德育处<br>
+                        线下办公地点：学校行政楼三楼团委办公室<br>
+                        咨询接待时间：工作日午休时段、课后活动时间
+                    </p>
+                </div>
+            </div>
+            <div class="right-col">
+                <h3 class="block-title" id="notice">通知公告</h3>
+                <div class="glass-card">
+                    <ul class="notice-list">
+                        <li>
+                            <a href="#">2026学年全校社团招新安排通知</a>
+                            <span class="notice-date">2026-09-01</span>
+                        </li>
+                        <li>
+                            <a href="#">秋季校园运动会志愿者招募公告</a>
+                            <span class="notice-date">2026-08-15</span>
+                        </li>
+                        <li>
+                            <a href="#">春季文艺汇演节目作品征集通知</a>
+                            <span class="notice-date">2026-08-02</span>
+                        </li>
+                        <li>
+                            <a href="#">学生协会干事换届名单公示</a>
+                            <span class="notice-date">2026-07-10</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="wrap">
+            <p>塘沽第一中学学生协会 版权所有 © 2026</p>
+            <p>本站由学校团委、德育处监督管理，校内学生交流站点</p>
+        </div>
+    </footer>
+
+    <script>
+        function setTheme(themeName) {
+            const root = document.documentElement;
+            root.className = "";
+            if (themeName !== "red") root.className = "theme-" + themeName;
+            localStorage.setItem("siteTheme", themeName);
+        }
+        window.onload = function () {
+            const saveTheme = localStorage.getItem("siteTheme");
+            if (saveTheme) setTheme(saveTheme);
+        }
+
+        const aiDialog = document.getElementById('aiDialog');
+        const aiToggleBtn = document.getElementById('aiToggleBtn');
+        const aiCloseBtn = document.getElementById('aiCloseBtn');
+        const msgBox = document.getElementById('msgBox');
+        const aiInput = document.getElementById('ai-input');
+        const aiSend = document.getElementById('ai-send');
+
+        aiToggleBtn.onclick = ()=>{
+            aiDialog.style.display = aiDialog.style.display === 'flex' ? 'none' : 'flex';
+        }
+        aiCloseBtn.onclick = ()=> aiDialog.style.display = 'none';
+
+        function addMsg(text, isUser=false){
+            const div = document.createElement('div');
+            div.className = `msg-item ${isUser?'msg-user':'msg-ai'}`;
+            div.innerHTML = `<div class="msg-bubble">${text}</div>`;
+            msgBox.appendChild(div);
+            msgBox.scrollTop = msgBox.scrollHeight;
+        }
+
+        async function requestAi(question){
+            await new Promise(r=>setTimeout(r,800));
+            return "协会招新每年9月统一开展，文艺、学科、志愿类社团均可报名，有问题可以继续提问！";
+        }
+
+        async function sendMessage(){
+            const text = aiInput.value.trim();
+            if(!text) return;
+            addMsg(text, true);
+            aiInput.value = "";
+            const reply = await requestAi(text);
+            addMsg(reply, false);
+        }
+        aiSend.onclick = sendMessage;
+        aiInput.onkeydown = e=>{
+            if(e.key === "Enter") sendMessage();
+        }
+    </script>
+</body>
+</html>
